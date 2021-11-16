@@ -6,11 +6,12 @@ private $identificacion;
 private $annorealizado;
 private Array $rutas;
 
- 	public function __construct($identificacion,$annorealizado, Array $rutas){
+ 	public function __construct($identificacion,$annorealizado){
+		//Seinicializa el array
+		$this->rutas = Array();
 
 		$this->identificacion=$identificacion;
 		$this->annorealizado=$annorealizado;
-		$this->rutas=$rutas;
 
 	}
 
@@ -32,8 +33,8 @@ private Array $rutas;
 		return $this->rutas;
 	}
 
-	public function setRutas(Array $rutas){
-		$this->rutas = $rutas;
+	public function setRutas(ruta $rutas){
+		array_push($this->rutas, $rutas);
 	} 
 
 }

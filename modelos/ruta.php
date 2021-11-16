@@ -11,14 +11,16 @@ class ruta{
     private $precio;
 	private Array $detalle_ruta;
 
-	public function __construct($codigo, $identificacion_catalogos,$identificacion_origen, $identificacion_destino,$forma_ruta,$precio, Array $detalle_ruta){
+	public function __construct($codigo, $identificacion_catalogos,$identificacion_origen, $identificacion_destino,$forma_ruta,$precio){	
+	//Se inicializa el array
+	$this->detalle_ruta=Array();
+
 	$this->codigo=$codigo;
 	$this->identificacion_catalogos=$identificacion_catalogos;
 	$this->identificacion_origen=$identificacion_origen;
 	$this->identificacion_destino=$identificacion_destino;
 	$this->forma_ruta=$forma_ruta;
-	$this->precio=$precio;
-	$this->detalle_ruta=$detalle_ruta;
+	$this->precio=$precio;	
 
 	}
 
@@ -67,8 +69,8 @@ class ruta{
 		return $this->detalle_ruta;
 	}
 
-	public function setDetalleRuta(Array $detalle){
-		$this->detalle_ruta = $detalle;
+	public function setDetalleRuta(detalle_ruta $detalle){		
+		array_push($this->detalle_ruta, $detalle);
 	} 
 
 }

@@ -7,12 +7,15 @@ class empleado{
     private $apellidos;
 	private Array $comunicacion;
 
-	public function __construct($cedula, $codigo_tipo_empleado,$nombres, $apellidos, Array $comunicacion){
+	public function __construct($cedula, $codigo_tipo_empleado,$nombres, $apellidos){
+		//Se inicializa el array
+		$this->comunicacion = Array();
+
 		$this->cedula=$cedula;
 		$this->codigo_tipo_empleado=$codigo_tipo_empleado;
 		$this->nombres=$nombres;
 		$this->apellidos=$apellidos;
-		$this->comunicacion;
+		
 	}
 
 	public function getcedula(){
@@ -45,11 +48,11 @@ class empleado{
 	} 
 
 	public function getComunicacion(){
-		return $this->cedula;
+		return $this->comunicacion;
 	}
 
-	public function setComunicacion(Array $comunicacion){
-		$this->comunicacion = $comunicacion;
+	public function setComunicacion(comunicacion $comunicacion){
+		array_push($this->comunicacion, $comunicacion);
 	}
 
 
