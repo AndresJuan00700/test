@@ -1,6 +1,6 @@
 <?php
 
-class tipo_comunicacion{
+class usuario{
     private $cedula_funcionario;	
     private $email;
     private $contraseña;

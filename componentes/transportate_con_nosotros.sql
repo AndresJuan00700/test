@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2021 a las 19:44:47
+-- Tiempo de generación: 17-11-2021 a las 15:38:50
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -28,7 +28,7 @@ USE `transportate_con_nosotros`;
 --
 -- Estructura de tabla para la tabla `asignaciones`
 --
--- Creación: 12-11-2021 a las 02:27:52
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `asignaciones`;
@@ -44,7 +44,7 @@ CREATE TABLE `asignaciones` (
 --
 -- Estructura de tabla para la tabla `catalogos_viajes`
 --
--- Creación: 12-11-2021 a las 02:30:33
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `catalogos_viajes`;
@@ -58,7 +58,7 @@ CREATE TABLE `catalogos_viajes` (
 --
 -- Estructura de tabla para la tabla `comunicaciones`
 --
--- Creación: 12-11-2021 a las 02:32:27
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `comunicaciones`;
@@ -73,7 +73,7 @@ CREATE TABLE `comunicaciones` (
 --
 -- Estructura de tabla para la tabla `destinos`
 --
--- Creación: 12-11-2021 a las 02:36:32
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `destinos`;
@@ -87,7 +87,7 @@ CREATE TABLE `destinos` (
 --
 -- Estructura de tabla para la tabla `detalles_ruta`
 --
--- Creación: 12-11-2021 a las 03:00:35
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `detalles_ruta`;
@@ -101,7 +101,7 @@ CREATE TABLE `detalles_ruta` (
 --
 -- Estructura de tabla para la tabla `empleados`
 --
--- Creación: 12-11-2021 a las 03:18:02
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `empleados`;
@@ -117,7 +117,7 @@ CREATE TABLE `empleados` (
 --
 -- Estructura de tabla para la tabla `medios_transportes`
 --
--- Creación: 12-11-2021 a las 03:35:59
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `medios_transportes`;
@@ -131,7 +131,7 @@ CREATE TABLE `medios_transportes` (
 --
 -- Estructura de tabla para la tabla `pasajes`
 --
--- Creación: 12-11-2021 a las 12:25:48
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `pasajes`;
@@ -147,7 +147,7 @@ CREATE TABLE `pasajes` (
 --
 -- Estructura de tabla para la tabla `rutas`
 --
--- Creación: 12-11-2021 a las 12:36:49
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `rutas`;
@@ -158,14 +158,14 @@ CREATE TABLE `rutas` (
   `identificacion_destino` varchar(20) COLLATE latin1_spanish_ci NOT NULL,
   `forma_ruta` varchar(15) COLLATE latin1_spanish_ci NOT NULL,
   `precio` int(11) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tipos_comunicacion`
 --
--- Creación: 12-11-2021 a las 12:43:59
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `tipos_comunicacion`;
@@ -179,7 +179,7 @@ CREATE TABLE `tipos_comunicacion` (
 --
 -- Estructura de tabla para la tabla `tipos_empleados`
 --
--- Creación: 12-11-2021 a las 12:45:08
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `tipos_empleados`;
@@ -193,7 +193,7 @@ CREATE TABLE `tipos_empleados` (
 --
 -- Estructura de tabla para la tabla `transportes`
 --
--- Creación: 12-11-2021 a las 12:46:33
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `transportes`;
@@ -207,7 +207,7 @@ CREATE TABLE `transportes` (
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
--- Creación: 12-11-2021 a las 13:11:16
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `usuarios`;
@@ -222,7 +222,7 @@ CREATE TABLE `usuarios` (
 --
 -- Estructura de tabla para la tabla `viajes`
 --
--- Creación: 12-11-2021 a las 13:22:10
+-- Creación: 13-11-2021 a las 18:47:05
 --
 
 DROP TABLE IF EXISTS `viajes`;
@@ -255,7 +255,8 @@ ALTER TABLE `catalogos_viajes`
 -- Indices de la tabla `comunicaciones`
 --
 ALTER TABLE `comunicaciones`
-  ADD UNIQUE KEY `cedula_empleado` (`cedula_empleado`,`numero`);
+  ADD UNIQUE KEY `cedula_empleado` (`cedula_empleado`,`numero`),
+  ADD KEY `comunicaciones_tipo_fk` (`id_tipo`);
 
 --
 -- Indices de la tabla `destinos`
@@ -349,7 +350,8 @@ ALTER TABLE `asignaciones`
 -- Filtros para la tabla `comunicaciones`
 --
 ALTER TABLE `comunicaciones`
-  ADD CONSTRAINT `comunicaciones_empleados_fk` FOREIGN KEY (`cedula_empleado`) REFERENCES `empleados` (`cedula`) ON DELETE CASCADE;
+  ADD CONSTRAINT `comunicaciones_empleados_fk` FOREIGN KEY (`cedula_empleado`) REFERENCES `empleados` (`cedula`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comunicaciones_tipo_fk` FOREIGN KEY (`id_tipo`) REFERENCES `tipos_comunicacion` (`identificacion`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `detalles_ruta`
