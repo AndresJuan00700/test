@@ -1,6 +1,6 @@
 <?php
 
-class tipo_comunicacion{
+class viaje{
     private $identificacion;	
     private $identificacion_asignaciones;
     private $codigo_ruta;
